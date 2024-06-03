@@ -1,0 +1,29 @@
+.contact_list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .contact_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    
+    border: 1px solid #ccc;
+  }
+  
+  .contact_item:last-child {
+    border-bottom: none;
+  }
+  
+  .button_close {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .button_close:hover {
+    text-decoration: underline;
+  }
+  
