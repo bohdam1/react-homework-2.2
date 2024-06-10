@@ -11,28 +11,28 @@ export class App extends Component {
     name: '',
     number: ''
   }
- 
+
   componentDidMount() {
-    const contacts =JSON.parse(localStorage.getItem('contacts')) ;
+    const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
     this.setState({ contacts });
   }
+
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.contacts.length !== this.state.contacts.length) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
 
   handleChange = (event) => {
-    const { name, value } = event.target;  
-    this.setState({ [name]: value });  
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
     const { name, number, contacts } = this.state;
 
-    // Перевірка чи ім'я вже присутнє у списку контактів
+    
     const isDuplicate = contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
     if (isDuplicate) {
       alert(`${name} is already in the contact list.`);
@@ -58,9 +58,6 @@ export class App extends Component {
     }));
   };
 
-
-
-
   render() {
     const { name, number, filter, contacts } = this.state;
     const filteredContacts = contacts.filter(contact => 
@@ -72,8 +69,8 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <FormBook name={name} number={number} onSubmit={this.handleSubmit} onChange={this.handleChange} />
         <h2>Contacts</h2>
-        <Filter onSearch={this.handleFilter}/>
-        <ContactsList contacts={filteredContacts} onDelete={this.handleDelete}/>
+        <Filter value={filter} onSearch={this.handleFilter} />
+        <ContactsList contacts={filteredContacts} onDelete={this.handleDelete} />
       </div>
     );
   }
