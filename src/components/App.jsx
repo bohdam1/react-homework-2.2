@@ -12,7 +12,16 @@ export class App extends Component {
     number: ''
   }
  
-
+  componentDidMount() {
+    const contacts =JSON.parse(localStorage.getItem('contacts')) ;
+    this.setState({ contacts });
+  }
+  componentDidUpdate(_, prevState) {
+    if (
+      prevState.contacts.length !== this.state.contacts.length) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   handleChange = (event) => {
     const { name, value } = event.target;  
